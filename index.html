@@ -501,7 +501,7 @@
 
       document.body.appendChild(hiddenForm);
       hiddenForm.submit();
-      document.body.removeChild(hiddenForm);
+      // Não remove do DOM imediatamente — Safari mobile cancela o envio se remover antes de concluir
 
       main.style.display    = 'none';
       success.style.display = 'block';

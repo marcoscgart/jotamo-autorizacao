@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autorização de imagem · Jotamo Modas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Tokens de marca ─────────────────────────────────────── */
+    :root {
+      --indigo:    #2A3D6B;
+      --indigo-dk: #1d2c4e;
+      --linho:     #FAF6F0;
+      --linho-alt: #EEE6D9;
+      --preto:     #1A1612;
+      --ouro:      #B8864E;
+      --sec:       #5A4E42;
+      --border:    #DDD4C5;
+      --surface:   #FFFFFF;
+      --success:   #2D6A4F;
+      --erro:      #8B3A3A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Textura de linho — fundo principal ──────────────────── */
+    body {
+      color: var(--preto);
+      font-family: 'Jost', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+
+      background-color: #F5EFE5;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 3px,
+          rgba(139, 110, 70, 0.055) 3px, rgba(139, 110, 70, 0.055) 4px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 3px,
+          rgba(139, 110, 70, 0.055) 3px, rgba(139, 110, 70, 0.055) 4px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 11px,
+          rgba(160, 125, 75, 0.03) 11px, rgba(160, 125, 75, 0.03) 12px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 11px,
+          rgba(160, 125, 75, 0.03) 11px, rgba(160, 125, 75, 0.03) 12px
+        );
+    }
+
+    /* ── Cabeçalho ───────────────────────────────────────────── */
+    .header {
+      background: var(--indigo);
+      padding: 36px 24px 30px;
+      text-align: center;
+    }
+    .header-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 26px;
+      letter-spacing: 8px;
+      color: var(--linho);
+      text-transform: uppercase;
+    }
+    .header-sub {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: rgba(250, 246, 240, 0.5);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ── Layout ──────────────────────────────────────────────── */
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+
+    /* ── Card principal (fundo branco linho sobre textura) ───── */
+    .card {
+      background: rgba(250, 246, 240, 0.92);
+      border-radius: 6px;
+      border: 1px solid rgba(221, 212, 197, 0.7);
+      padding: 36px 32px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ── Intro ───────────────────────────────────────────────── */
+    .intro { margin-bottom: 32px; }
+    .intro h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 1.2;
+      color: var(--preto);
+      margin-bottom: 14px;
+    }
+    .intro p {
+      font-size: 15px;
+      color: var(--sec);
+      line-height: 1.75;
+    }
+
+    /* ── Divisor ─────────────────────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 26px 0;
+    }
+
+    /* ── Rótulo de seção ─────────────────────────────────────── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin-bottom: 18px;
+    }
+
+    /* ── Campos de texto ─────────────────────────────────────── */
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--sec);
+      margin-bottom: 7px;
+    }
+    .field input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 13px 15px;
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      color: var(--preto);
+      outline: none;
+      transition: border-color 0.18s;
+      -webkit-appearance: none;
+    }
+    .field input:focus { border-color: var(--indigo); }
+    .field input::placeholder { color: #C2B8AD; }
+
+    /* ── Checkboxes de consentimento ─────────────────────────── */
+    .consent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .consent-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      background: rgba(255,255,255,0.75);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .consent-item:has(input:checked) {
+      border-color: var(--indigo);
+      background: rgba(42, 61, 107, 0.05);
+    }
+    .consent-item input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 21px;
+      height: 21px;
+      min-width: 21px;
+      border: 2px solid var(--border);
+      border-radius: 3px;
+      background: white;
+      cursor: pointer;
+      margin-top: 1px;
+      position: relative;
+      transition: all 0.18s;
+    }
+    .consent-item input[type="checkbox"]:checked {
+      background: var(--indigo);
+      border-color: var(--indigo);
+    }
+    .consent-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4.5px;
+      top: 1px;
+      width: 7px;
+      height: 12px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(43deg);
+    }
+    .consent-text { flex: 1; }
+    .consent-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--preto);
+      margin-bottom: 4px;
+    }
+    .consent-text small {
+      font-size: 12px;
+      color: var(--sec);
+      line-height: 1.5;
+    }
+
+    /* ── Itens informativos ──────────────────────────────────── */
+    .info-list { display: flex; flex-direction: column; gap: 10px; }
+    .info-item {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--sec);
+      line-height: 1.55;
+    }
+    .info-item .arrow { color: var(--indigo); font-weight: 600; flex-shrink: 0; }
+
+    /* ── Botão ───────────────────────────────────────────────── */
+    .submit-area {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+    .btn-submit {
+      background: var(--indigo);
+      color: var(--linho);
+      border: none;
+      border-radius: 4px;
+      padding: 17px 32px;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s;
+      width: 100%;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--indigo-dk); }
+    .btn-submit:disabled {
+      background: var(--border);
+      color: var(--sec);
+      cursor: not-allowed;
+    }
+    .submit-note {
+      font-size: 12px;
+      color: var(--sec);
+      text-align: center;
+      line-height: 1.65;
+    }
+
+    /* ── Erro ────────────────────────────────────────────────── */
+    .error-msg {
+      display: none;
+      background: #fff4f4;
+      border: 1px solid #f0d0d0;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--erro);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ── Sucesso ─────────────────────────────────────────────── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 56px 16px;
+    }
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(45, 106, 79, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+      color: var(--success);
+    }
+    .success-screen h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 30px;
+      color: var(--preto);
+      margin-bottom: 14px;
+    }
+    .success-screen p {
+      font-size: 15px;
+      color: var(--sec);
+      line-height: 1.8;
+    }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    .footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: #BFB5A8;
+      line-height: 1.7;
+    }
+
+    /* ── Mobile ──────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .header { padding: 28px 20px 24px; }
+      .header-brand { font-size: 22px; letter-spacing: 6px; }
+      .container { padding: 20px 14px 48px; }
+      .card { padding: 28px 20px; }
+      .intro h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Cabeçalho ─────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-brand">Jotamo Modas</div>
+    <div class="header-sub">Ateliê de moda feminina sob encomenda · Rio de Janeiro</div>
+  </header>
+
+  <div class="container">
+
+    <!-- ── Tela principal ──────────────────────────────────── -->
+    <div id="main-content">
+      <div class="card">
+
+        <div class="intro">
+          <h1>Posso usar sua foto para criar uma imagem de divulgação?</h1>
+          <p>
+            Antes de criar qualquer imagem com a sua foto, preciso do seu "sim" registrado.
+            Preenche aqui embaixo — leva menos de um minuto.
+          </p>
+        </div>
+
+        <form id="consent-form">
+
+          <!-- ── Dados ────────────────────────────────────────── -->
+          <p class="section-label">Seus dados</p>
+
+          <div class="field">
+            <label for="nome">Nome completo <span style="color:var(--ouro)">*</span></label>
+            <input type="text" id="nome" name="nome"
+                   placeholder="Como você se chama" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="whatsapp">WhatsApp <span style="color:var(--ouro)">*</span></label>
+            <input type="tel" id="whatsapp" name="whatsapp"
+                   placeholder="(21) 99999-9999" required autocomplete="tel" />
+          </div>
+
+          <hr />
+
+          <!-- ── Consentimento ────────────────────────────────── -->
+          <p class="section-label">O que estou autorizando</p>
+
+          <div class="consent-list">
+
+            <label class="consent-item">
+              <input type="checkbox" name="autoriza_geracao" required />
+              <div class="consent-text">
+                <strong>A Jotamo pode usar minha foto como referência para criar uma imagem por IA.</strong>
+                <small>Só a imagem gerada por IA é usada para divulgação — sua foto original fica guardada.</small>
+              </div>
+            </label>
+
+            <label class="consent-item">
+              <input type="checkbox" name="autoriza_publicacao" required />
+              <div class="consent-text">
+                <strong>A imagem gerada pode aparecer no Instagram da Jotamo (@jotamomodas).</strong>
+                <small>Você vê a imagem antes de publicar e pode recusar se não gostar.</small>
+              </div>
+            </label>
+
+            <label class="consent-item">
+              <input type="checkbox" name="entende_revogacao" required />
+              <div class="consent-text">
+                <strong>Sei que posso cancelar quando quiser.</strong>
+                <small>Basta mandar mensagem no WhatsApp. Tudo sai do ar em até 7 dias.</small>
+              </div>
+            </label>
+
+          </div>
+
+          <hr />
+
+          <!-- ── Compromissos ─────────────────────────────────── -->
+          <p class="section-label">O que nunca vai acontecer com sua foto</p>
+
+          <div class="info-list">
+            <div class="info-item"><span class="arrow">→</span><span>Sua foto original não é publicada em nenhum lugar.</span></div>
+            <div class="info-item"><span class="arrow">→</span><span>Sua foto não é compartilhada com outras marcas ou plataformas.</span></div>
+            <div class="info-item"><span class="arrow">→</span><span>Seu nome não aparece sem você pedir.</span></div>
+            <div class="info-item"><span class="arrow">→</span><span>Sua imagem não entra em anúncio pago.</span></div>
+            <div class="info-item"><span class="arrow">→</span><span>Sua foto não é usada para treinar sistemas de IA.</span></div>
+          </div>
+
+          <hr />
+
+          <!-- ── Enviar ────────────────────────────────────────── -->
+          <div class="submit-area">
+            <button type="submit" class="btn-submit" id="btn-submit">Autorizo ✓</button>
+            <p class="submit-note">
+              Ao clicar, seu "sim" fica registrado na planilha da Jaqueline com seu nome, WhatsApp e a data de hoje.
+            </p>
+            <div class="error-msg" id="error-msg">
+              Algo deu errado no envio. Me chama no WhatsApp (21) 99008-0445 para registrar de outro jeito.
+            </div>
+          </div>
+
+        </form>
+
+        <div class="footer">
+          Jotamo Modas · @jotamomodas · (21) 99008-0445 · Rio de Janeiro
+        </div>
+
+      </div>
+    </div>
+    <!-- /main-content -->
+
+    <!-- ── Tela de sucesso ──────────────────────────────────── -->
+    <div class="success-screen" id="success-screen">
+      <div class="card">
+        <div class="success-icon">✓</div>
+        <h2>Tudo certo!</h2>
+        <p>
+          Sua autorização foi registrada.<br />
+          A Jaqueline já foi avisada.<br /><br />
+          Quando a imagem ficar pronta, você recebe<br />
+          pelo WhatsApp para aprovar antes de publicar.
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <script>
+    // ── URL do Google Apps Script ──────────────────────────────
+    // Substitua pela URL gerada ao implantar o script (Implantar > Nova implantação)
+    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz83qwtIaD9VGYTHQjjKMMpGUYEiwh2ct_JM3WKdYx9AnoCh-8puoheQnegLu5yXUw8uQ/exec';
+
+    var form    = document.getElementById('consent-form');
+    var btn     = document.getElementById('btn-submit');
+    var main    = document.getElementById('main-content');
+    var success = document.getElementById('success-screen');
+    var errMsg  = document.getElementById('error-msg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+      errMsg.style.display = 'none';
+
+      var payload = {
+        data_hora:           new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+        nome:                document.getElementById('nome').value.trim(),
+        whatsapp:            document.getElementById('whatsapp').value.trim(),
+        autoriza_geracao:    'Sim',
+        autoriza_publicacao: 'Sim',
+        entende_revogacao:   'Sim'
+      };
+
+      fetch(APPS_SCRIPT_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      })
+      .then(function () {
+        main.style.display    = 'none';
+        success.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function () {
+        btn.disabled    = false;
+        btn.textContent = 'Autorizo ✓';
+        errMsg.style.display = 'block';
+      });
+    });
+  </script>
+
+</body>
+</html>

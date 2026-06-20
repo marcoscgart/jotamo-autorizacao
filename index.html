@@ -462,7 +462,7 @@
   <script>
     // ── URL do Google Apps Script ──────────────────────────────
     // Substitua pela URL gerada ao implantar o script (Implantar > Nova implantação)
-    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz83qwtIaD9VGYTHQjjKMMpGUYEiwh2ct_JM3WKdYx9AnoCh-8puoheQnegLu5yXUw8uQ/exec';
+    var APPS_SCRIPT_URL = 'https://jotamo-autorizacao.marcoscgart.workers.dev/';
 
     var form    = document.getElementById('consent-form');
     var btn     = document.getElementById('btn-submit');
@@ -486,9 +486,9 @@
       };
 
       fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode:   'no-cors',
-        body:   JSON.stringify(payload)
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
       })
       .then(function () {
         main.style.display    = 'none';
